@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://app.stg.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-4ZUq7COOYDwZQzqt"></script>
+    <script type="module" src="vendor/midtrans/prosess-payment/payment.js"></script>
+
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <span
+            class="bg-black  border-gray-200 dark:bg-gray-900 fixed top-0 w-full z-50 transition duration-300 ease-in-out ">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src="/assets/logo2.png" class="h-12" alt="Flowbite Logo" />
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
+                </a>
+
+                <div class="navbar-center hidden lg:flex">
+                    <ul class="menu menu-horizontal px-1 text-white ">
+                        <a class="btn btn-ghost rounded-btn" href="/">Beranda</a>
+                        <a href="/destinasi" class="btn btn-ghost rounded-btn">Destinasi</a>
+                        <a href="/kontak" class="btn btn-ghost rounded-btn">Kontak</a>
+                        <a href="/Admin" class="btn btn-ghost rounded-btn">Admin</a>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </span>
+    </nav>
+    <span>
+        <img src="assets/bg2.png" class="h-full w-full bg-gradient-to-b from-transparent to-white" alt="">
+    </span>
+    <span class="flex w-full flex-col mt-20 px-20 max-md:max-w-full max-md:px-5 mb-10">
+        <div class="flex w-full">
+            <!-- Description Section -->
+            <div class="w-1/2 p-8">
+                <h1 class="text-3xl font-bold mb-4">
+                    <%= it.data.tempat_wisata %>
+                </h1>
+                <p class="mb-4">
+                    <%= it.data.isi_konten %>
+                </p>
+                <a href="https://api.whatsapp.com/send?phone=<?php echo $whatsapp_number; ?>&text=<?php echo urlencode($default_message); ?>"
+                    class="btn btn-primary">Pesan</a>
+                <button id="pay-button" class="btn btn-secondary mt-4">Pay with Midtrans</button>
+            </div>
+
+            <!-- Map Section -->
+            <div class="w-1/2 relative">
+                <iframe src="<%= it.data.map_url %>" class="w-full" width="100%" height="450" style="border:0;"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        <hr class="mt-10">
+    </span>
+    <span class="flex w-full flex-col px-20 max-md:max-w-full max-md:px-5 mb-10">
+        <div
+            class="text-black text-5xl font-medium self-stretch mt-20 mx-5 max-md:max-w-full max-md:text-4xl max-md:mr-2.5 max-md:mt-10 mb-10 ">
+            Pertanyaan yang sering diajukan
+        </div>
+        <div id="contentQnA1" class="mb-2"></div>
+        <div id="contentQnA2" class="mb-2"></div>
+    </span>
+    <span>
+        <div class="items-center bg-black flex w-full flex-col -mt-1 px-20 py-9 max-md:max-w-full max-md:px-5">
+            <img loading="lazy" src="/assets/logo2.png"
+                class="aspect-[8.33] object-contain object-center w-[450px] justify-center items-start overflow-hidden self-center max-w-full mt-1.5" />
+            <div class="text-white text-center text-xl self-center mt-7 max-md:max-w-full">
+                © 2023 NAMA APPS LLC Semua hak dilindungi undang-undang.
+            </div>
+            <div class="justify-between items-stretch self-center flex gap-5 mt-7 max-md:max-w-full max-md:flex-wrap">
+                <div class="text-white text-center text-xl underline grow whitespace-nowrap">
+                    Kebijakan Privasi
+                </div>
+                <div class="text-white text-center text-xl underline">Hubungi Kami</div>
+                <div class="text-white text-center text-xl underline grow whitespace-nowrap">
+                    Syarat dan Ketentuan
+                </div>
+            </div>
+        </div>
+    </span>
+    </div>
+    <!-- JS -->
+
+    <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./js/route-html.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/qna.js"></script>
+    <script src="./js/footer.js"></script>
+    <script>
+        document.getElementById('pay-button').onclick = async function () {
+            try {
+                const data = {
+                    "order_id": `${Math.floor(Math.random() * 100000)}`,
+                    "gross_amount": 10000,
+                    "first_name": "John",
+                    "last_name": "Doe",
+                    "email": "john.doe@example.com",
+                    "phone": "+628123456789"
+                }
+                const response = await fetch('http://localhost:3000/getTokenMidtrans', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                const url  = await response.json();
+                window.location.href = url.data.redirect_url
+            } catch (error) {
+                console.log('Fetch error:', error);
+            }
+        };
+
+
+    </script>
+</body>
+
+</html>

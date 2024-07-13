@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <!-- FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <nav>
+    <span
+      class="bg-black  border-gray-200 dark:bg-gray-900 fixed top-0 w-full z-50 transition duration-300 ease-in-out ">
+      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <a href="beranda.php" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src="assets/logo2.png" class="h-12" alt="Flowbite Logo" />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
+        </a>
+
+        <div class="navbar-center hidden lg:flex">
+          <ul class="menu menu-horizontal px-1 text-white ">
+            <a class="btn btn-ghost rounded-btn" href="/">Beranda</a>
+            <a href="/destinasi" class="btn btn-ghost rounded-btn">Destinasi</a>
+            <a href="/kontak" class="btn btn-ghost rounded-btn">Kontak</a>
+            <a href="/admin" class="btn btn-ghost rounded-btn">Admin</a>
+          </ul>
+        </div>
+      </div>
+      </div>
+    </span>
+  </nav>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <span>
+    <img src="assets/bg3.png" class="h-full w-full bg-gradient-to-b from-transparent to-white" alt="">
+    <div class="absolute inset-0 flex items-center justify-center  ">
+      <p class="text-white text-center text-7xl font-extrabold" style="letter-spacing: 0.15em;">Destinasi</p>
+    </div>
+  </span>
+  <span class="flex w-full flex-col mt-4 px-20 max-md:max-w-full max-md:px-5 mb-10">
+    <div
+      class="text-black text-5xl font-medium self-stretch mt-20 mx-5 max-md:max-w-full max-md:text-4xl max-md:mr-2.5 max-md:mt-10 mb-10 ">
+      Destinasi di NTT
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+      <% if(it.data.length> 0) { %>
+        <% it.data.forEach((destinasi)=> { %>
+          <a href="/detaildestinasi/<%= destinasi.id %>" class="no-underline">
+            <div class="card h-80 card-side rounded-lg overflow-hidden shadow-xl glass">
+              <img src="assets/<%= destinasi.Gambar %>" alt="Gambar <%= destinasi.gambar %>" class="w-60" />
+              <div class="card-body p-4">
+                <h2 class="card-title text-xl font-bold">
+                  <%= destinasi.tempat_wisata %>
+                </h2>
+                <p class="line-clamp-3">
+                  <%= destinasi.isi_konten %>
+                </p>
+                </p>
+              </div>
+            </div>
+          </a>
+          <% }) %>
+            <% } %>
+    </div>
+    <!-- INSPIRASI PERJALANAN -->
+    <div
+      class="text-black text-5xl font-medium self-stretch mt-20 mx-5 max-md:max-w-full max-md:text-4xl max-md:mr-2.5 max-md:mt-10 mb-20">
+      Inspirasi Perjalanan
+    </div>
+    <div>
+      <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
+        <img style="width: 240px; height: 240px; border-radius: 10px" src="./assets/kontenig1.png" />
+        <img style="width: 240px; height: 240px; border-radius: 10px" src="./assets/kontenig2.png" />
+        <img style="width: 240px; height: 240px; border-radius: 10px" src="./assets/kontenig3.png" />
+        <img style="width: 240px; height: 240px; border-radius: 10px" src="./assets/kontenig4.png" />
+        <img style="width: 240px; height: 240px; border-radius: 10px" src="./assets/kontenig5.png" />
+        <img style="width: 240px; height: 240px; border-radius: 10px" src="./assets/kontenig6.png" />
+        <img style="width: 240px; height: 240px; border-radius: 10px" src="./assets/kontenig7.png" />
+        <img style="width: 240px; height: 240px; border-radius: 10px" src="./assets/kontenig8.png" />
+        <img style="width: 240px; height: 240px; border-radius: 10px" src="./assets/kontenig9.png" />
+        <img style="width: 240px; height: 240px; border-radius: 10px" src="./assets/kontenig10.png" />
+      </div>
+    </div>
+  </span>
+  <span>
+    <div class="items-center bg-black flex w-full flex-col -mt-1 px-20 py-9 max-md:max-w-full max-md:px-5">
+      <img loading="lazy" src="./assets/logo2.png"
+        class="aspect-[8.33] object-contain object-center w-[450px] justify-center items-start overflow-hidden self-center max-w-full mt-1.5" />
+      <div class="text-white text-center text-xl self-center mt-7 max-md:max-w-full">
+        © 2023 NAMA APPS LLC Semua hak dilindungi undang-undang.
+      </div>
+      <div class="justify-between items-stretch self-center flex gap-5 mt-7 max-md:max-w-full max-md:flex-wrap">
+        <div class="text-white text-center text-xl underline grow whitespace-nowrap">
+          Kebijakan Privasi
+        </div>
+        <div class="text-white text-center text-xl underline">Hubungi Kami</div>
+        <div class="text-white text-center text-xl underline grow whitespace-nowrap">
+          Syarat dan Ketentuan
+        </div>
+      </div>
+    </div>
+  </span>
+  </div>
+  <a href=""></a>
+  </script>
+  <!-- JS -->
+  <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</body>
+
+</html>
