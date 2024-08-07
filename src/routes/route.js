@@ -42,12 +42,33 @@ const route = (app) => {
 
   app.get("/admin/index", async (req, res) => {
     try {
-      res.render("Admin/index");
+      const data = await getAllDestinasiAPI();
+      res.render("Admin/index", { data: data.data });
     } catch (error) {
       console.error("Error in route handler:", error);
       res.status(500).send("Internal Server Error");
     }
   });
+  app.get("/admin/kelola", async (req, res) => {
+    try {
+      const data = await getAllDestinasiAPI();
+      res.render("Admin/kelola", { data: data.data });
+    } catch (error) {
+      console.error("Error in route handler:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
+  app.get("/admin/dashboard", async (req, res) => {
+    try {
+      const data = await getTestimoniAPI();
+      res.render("Admin/dashboard", { data: data.data });
+    } catch (error) {
+      console.error("Error in route handler:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
 
   app.get("/detaildestinasi/:id", async (req, res) => {
     try {

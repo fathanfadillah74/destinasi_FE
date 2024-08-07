@@ -30,7 +30,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
   <div class="container">
-    <a class="navbar-brand" href="index.php">Admin</a>
+    <a class="navbar-brand" href="/">Admin</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -62,7 +62,7 @@
                 <tr>
                  <th><center>No.</center></th>
                  <th><center>Nama</center></th>
-                 <th><center>Email</center></th>
+                 <th><center>posisi</center></th>
                  <th><center>Pesan</center></th>
                  <th><center>Aksi</center></th>
                 </tr>
@@ -70,34 +70,29 @@
               </div>
               </div>
 
-              <?php
-              include "koneksi.php";
-              $no = 1;
-              $ambildata = mysqli_query($conn, "select * from kontak");
-              while ($tampil = mysqli_fetch_array($ambildata)) {
-                echo "
-                <tr>
-                <td>$no</td>
-                <td>$tampil[Nama]</td>
-                <td>$tampil[Email]</td>
-                <td>$tampil[Pesan]</td>   
-                <td><center><a href='?kode=$tampil[Nama]' class='btn btn-danger'>Hapus</a></center></td>
-                </tr>";     
-                
-                $no++;
-              }
-              ?>
+                <% if(it.data.length> 0) { %>
+                  <% it.data.forEach((testimoni,index)=> { %>
+                    <tr>
+                      <td><%= index + 1 %></td>
+                      <td>
+                        <%= testimoni.nama %>
+                      </td>
+                      <td>
+                        <%= testimoni.posisi %>
+                      </td>
+                      <td>
+                        <%= testimoni.deskripsi %>
+                      </td>
+                      <td><a href="/admin/kelola/edit/<%= testimoni.id %>" type="button" class="btn btn-warning btn-sm"><i
+                            class="fa fa-edit"></i> Edit</a>
+                        <a href="/admin/kelola/delete/<%= testimoni.id %>" type="button" class="btn btn-danger btn-sm"><i
+                            class="fa fa-trash"></i> Hapus</a>
+                      </td>
+                    </tr>
+                    <% }) %>
+                      <% } %>
 </table>
 
-<?php
-if(isset($_GET['kode'])){
-
-mysqli_query($conn, "delete from kontak where Nama='$_GET[kode]'");
-
-echo "Data Berhasil Dihapus";
-echo "<meta http-equiv=refresh content=2;URL='dashboard.php'>";
-}
-?>
 
 
   </body>
